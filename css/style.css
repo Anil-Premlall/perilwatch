@@ -380,7 +380,7 @@ a:hover { color: var(--amber); }
   box-shadow: 0 0 0 1px var(--amber-hover), var(--shadow-lg);
 }
 .product-card--coming-soon {
-  opacity: 0.75;
+  opacity: 0.9;
 }
 
 .product-badge {
@@ -698,20 +698,20 @@ a:hover { color: var(--amber); }
 
 /* ===== NOTIFY FORM (RiskScent waitlist) ===== */
 .notify-form {
-  margin-top: 4px;
+  margin-top: 8px;
 }
 .notify-row {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 10px;
 }
 .notify-input {
-  flex: 1;
-  min-width: 0;
-  padding: 11px 14px;
-  font-size: 14px;
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 15px;
   font-family: var(--font-sans);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
   background: var(--white);
   color: var(--gray-900);
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -723,24 +723,25 @@ a:hover { color: var(--amber); }
 }
 .notify-input::placeholder { color: var(--gray-400); }
 .notify-btn {
-  padding: 11px 18px;
-  font-size: 14px;
+  width: 100%;
+  padding: 13px 24px;
+  font-size: 15px;
   font-weight: 700;
   font-family: var(--font-sans);
   background: var(--navy);
   color: var(--white);
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  white-space: nowrap;
   transition: background 0.2s;
 }
-.notify-btn:hover { background: var(--navy-light); }
+.notify-btn:hover { background: var(--navy-mid); }
 .notify-btn:disabled { opacity: 0.6; cursor: default; }
 .notify-status {
-  margin-top: 8px;
+  margin-top: 10px;
   font-size: 13px;
-  min-height: 18px;
+  line-height: 1.5;
+  min-height: 20px;
 }
 .notify-status.success { color: var(--green-text); }
 .notify-status.error   { color: #dc2626; }
