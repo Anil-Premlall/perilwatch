@@ -7,11 +7,24 @@
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  // CORS preflight handled by CF Pages automatically for same-origin.
-  // Allow cross-origin if ever needed:
-  const headers = {
+  const isAjax = request.headers.get('Accept')?.includes('application/json');
+
+  const jsonHeaders = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'https://perilwatch.com',
+  };
+
+  const redirect = (msg, isError = false) => {
+    if (isAjax) {
+      return new Response(
+        JSON.stringify(isError ? { error: msg } : { ok: true }),
+        { status: isError ? 400 : 200, headers: jsonHeaders }
+      );
+    }
+    return Response.redirect(
+      `https://perilwatch.com/?notify=${isError ? 'error' : 'ok'}`,
+      303
+    );
   };
 
   try {
@@ -19,11 +32,11 @@ export async function onRequestPost(context) {
     const email = (body.get('email') || '').trim().toLowerCase();
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return new Response(JSON.stringify({ error: 'Valid email required.' }), { status: 400, headers });
+      return redirect('Valid email required.', true);
     }
 
     if (!env.SUPABASE_URL || !env.SUPABASE_ANON_KEY) {
-      return new Response(JSON.stringify({ error: 'Server misconfiguration.' }), { status: 500, headers });
+      return redirect('Server misconfiguration.', true);
     }
 
     const res = await fetch(`${env.SUPABASE_URL}/rest/v1/riskscent_waitlist`, {
@@ -39,19 +52,18 @@ export async function onRequestPost(context) {
 
     if (!res.ok) {
       const text = await res.text();
-      // Duplicate email — treat as success so we don't leak whether email exists
       if (res.status === 409 || text.includes('duplicate') || text.includes('unique')) {
-        return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
+        return redirect('ok');
       }
       console.error('Supabase error:', res.status, text);
-      return new Response(JSON.stringify({ error: 'Could not save. Try again.' }), { status: 500, headers });
+      return redirect('Could not save. Try again.', true);
     }
 
-    return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
+    return redirect('ok');
 
   } catch (err) {
     console.error('notify function error:', err);
-    return new Response(JSON.stringify({ error: 'Server error.' }), { status: 500, headers });
+    return redirect('Server error.', true);
   }
 }
 

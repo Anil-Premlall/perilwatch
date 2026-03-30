@@ -39,6 +39,20 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Show success banner if redirected back from /notify
+(function() {
+  if (window.location.search.includes('notify=ok')) {
+    var form = document.getElementById('riskscent-notify');
+    if (!form) return;
+    var status = form.querySelector('.notify-status');
+    if (status) {
+      status.textContent = "You're on the list — we'll email you when RiskScent launches.";
+      status.className = 'notify-status success';
+    }
+    window.history.replaceState({}, '', '/');
+  }
+})();
+
 // Mobile menu toggle
 (function() {
   var toggle = document.querySelector('.nav-toggle');
