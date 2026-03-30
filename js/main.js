@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     try {
       var data = new FormData(form);
-      var res = await fetch('/notify', { method: 'POST', body: data });
+      var res = await fetch('/notify', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
       var json = await res.json();
 
       if (res.ok && json.ok) {
