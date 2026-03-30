@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       var data = new FormData(form);
       var res = await fetch('/notify', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-      var json = await res.json();
+      var text = await res.text();
+      console.log('notify response:', res.status, text);
+      var json = JSON.parse(text);
 
       if (res.ok && json.ok) {
         status.textContent = "You're on the list — we'll email you when RiskScent launches.";
@@ -31,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.textContent = 'Notify Me';
       }
     } catch (err) {
+      console.error('notify error:', err);
       status.textContent = 'Connection error. Try again.';
       status.className = 'notify-status error';
       btn.disabled = false;
