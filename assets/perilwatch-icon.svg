@@ -1,0 +1,24 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#0f172a"/>
+
+  <!-- Outer eye shape -->
+  <ellipse cx="256" cy="256" rx="168" ry="104" stroke="#f59e0b" stroke-width="28" fill="none"/>
+
+  <!-- Iris -->
+  <circle cx="256" cy="256" r="68" fill="#f59e0b"/>
+
+  <!-- Pupil -->
+  <circle cx="256" cy="256" r="34" fill="#0f172a"/>
+
+  <!-- Scan lines left -->
+  <line x1="76" y1="256" x2="136" y2="256" stroke="#f59e0b" stroke-width="24" stroke-linecap="round"/>
+
+  <!-- Scan lines right -->
+  <line x1="376" y1="256" x2="436" y2="256" stroke="#f59e0b" stroke-width="24" stroke-linecap="round"/>
+
+  <!-- Top lash lines -->
+  <line x1="176" y1="148" x2="192" y2="172" stroke="#f59e0b" stroke-width="14" stroke-linecap="round" opacity="0.5"/>
+  <line x1="256" y1="136" x2="256" y2="164" stroke="#f59e0b" stroke-width="14" stroke-linecap="round" opacity="0.5"/>
+  <line x1="336" y1="148" x2="320" y2="172" stroke="#f59e0b" stroke-width="14" stroke-linecap="round" opacity="0.5"/>
+</svg>
