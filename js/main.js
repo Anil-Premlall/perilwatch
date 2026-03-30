@@ -1,5 +1,5 @@
 // RiskScent notify form
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('riskscent-notify');
   if (!form) return;
 
@@ -37,7 +37,7 @@
       btn.textContent = 'Notify Me';
     }
   });
-})();
+});
 
 // Mobile menu toggle
 (function() {
