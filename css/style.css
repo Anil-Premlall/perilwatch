@@ -696,6 +696,55 @@ a:hover { color: var(--amber); }
   gap: 20px;
 }
 
+/* ===== NOTIFY FORM (RiskScent waitlist) ===== */
+.notify-form {
+  margin-top: 4px;
+}
+.notify-row {
+  display: flex;
+  gap: 8px;
+}
+.notify-input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--gray-900);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.notify-input:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.15);
+}
+.notify-input::placeholder { color: var(--gray-400); }
+.notify-btn {
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.notify-btn:hover { background: var(--navy-light); }
+.notify-btn:disabled { opacity: 0.6; cursor: default; }
+.notify-status {
+  margin-top: 8px;
+  font-size: 13px;
+  min-height: 18px;
+}
+.notify-status.success { color: var(--green-text); }
+.notify-status.error   { color: #dc2626; }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .nav-links {

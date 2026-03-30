@@ -172,7 +172,21 @@
                 Integrates with LiabilityScore™
               </li>
             </ul>
-            <span class="btn-product btn-product--soon">Notify Me When Live</span>
+            <form class="notify-form" id="riskscent-notify" aria-label="RiskScent early access">
+              <div class="notify-row">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="your@email.com"
+                  required
+                  autocomplete="email"
+                  aria-label="Email address"
+                  class="notify-input"
+                />
+                <button type="submit" class="notify-btn">Notify Me</button>
+              </div>
+              <p class="notify-status" aria-live="polite"></p>
+            </form>
           </div>
 
         </div>
