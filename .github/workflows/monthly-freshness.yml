@@ -1,0 +1,33 @@
+name: Monthly Freshness
+
+on:
+  schedule:
+    - cron: '0 6 1 * *'   # 1st of every month at 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  freshen:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update copyright year and sitemap lastmod
+        run: |
+          YEAR=$(date +%Y)
+          DATE=$(date +%Y-%m-%d)
+
+          # Update copyright year in index.html
+          sed -i "s/&copy; [0-9]\{4\} PerilWatch/\&copy; $YEAR PerilWatch/g" index.html
+
+          # Update lastmod in sitemap.xml
+          sed -i "s|<lastmod>[0-9-]*</lastmod>|<lastmod>$DATE</lastmod>|g" sitemap.xml
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html sitemap.xml
+          git diff --cached --quiet || git commit -m "chore: monthly freshness update $(date +%Y-%m-%d)"
+          git push
