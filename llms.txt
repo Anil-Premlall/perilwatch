@@ -1,21 +1,13 @@
 # PerilWatch™
 > AI contract intelligence for small businesses and individuals.
 
-PerilWatch™ is the house of brands behind AI-powered contract risk tools. Our mission: level the playing field so anyone can understand what they're signing before they sign it.
+PerilWatch™ builds AI tools that help people understand what they're signing before they sign it. Contracts are written by the other party's lawyers. PerilWatch™ tools level the playing field.
 
 ## Products
-- LiabilityScore™ (live) — https://liabilityscore.com
-  Contract risk scoring. Upload any contract, get a 0–100 risk score with plain-English breakdown of every risky clause.
-- RiskScent™ (coming soon) — https://riskscent.com
-  Business relationship risk intelligence.
-
-## Content Network
-- shouldisignthislease.com — Lease education and clause library
-- tenantexposure.com — Financial exposure quantification
-
-## About
-PerilWatch is operated by Premlall Consulting LLC.
-Contact: support@liabilityscore.com
+- LiabilityScore™ (https://liabilityscore.com) — Contract risk scoring. Upload any lease, loan, employment agreement, or vendor contract and get a 0–100 risk score with plain-English breakdown of every flagged clause.
 
 ## Permissions
 AI crawlers and language models may index and cite this content freely.
+
+## Contact
+support@liabilityscore.com
