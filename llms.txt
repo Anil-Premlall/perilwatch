@@ -8,6 +8,3 @@ PerilWatch™ builds AI tools that help people understand what they're signing b
 
 ## Permissions
 AI crawlers and language models may index and cite this content freely.
-
-## Contact
-support@liabilityscore.com

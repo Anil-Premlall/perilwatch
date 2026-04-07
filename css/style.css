@@ -295,7 +295,7 @@ a:hover { color: var(--amber); }
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--amber-dark);
+  color: var(--amber-text);
   margin-bottom: 10px;
 }
 .section--dark .section-label { color: var(--amber); }
@@ -402,7 +402,7 @@ a:hover { color: var(--amber); }
 }
 .product-badge--soon {
   background: var(--gray-100);
-  color: var(--gray-500);
+  color: var(--gray-700);
   border: 1px solid var(--gray-200);
 }
 
@@ -428,7 +428,7 @@ a:hover { color: var(--amber); }
 }
 .product-domain {
   font-size: 13px;
-  color: var(--gray-400);
+  color: var(--gray-600);
   margin-bottom: 14px;
 }
 .product-desc {
@@ -482,7 +482,7 @@ a:hover { color: var(--amber); }
 }
 .btn-product--soon {
   background: var(--gray-100);
-  color: var(--gray-400);
+  color: var(--gray-600);
   cursor: default;
   pointer-events: none;
 }
@@ -654,16 +654,16 @@ a:hover { color: var(--amber); }
 }
 .footer-brand .brand-tagline {
   font-size: 13px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.55);
   max-width: 260px;
   line-height: 1.5;
 }
-.footer-links-col h4 {
+.footer-links-col .footer-col-heading {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.65);
   margin-bottom: 14px;
 }
 .footer-links-col ul { list-style: none; }
@@ -691,6 +691,12 @@ a:hover { color: var(--amber); }
   transition: color 0.2s;
 }
 .footer-bottom a:hover { color: var(--amber); }
+
+.footer-legal-link {
+  color: rgba(255,255,255,0.7) !important;
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,0.3);
+}
 .footer-links-inline {
   display: flex;
   gap: 20px;
