@@ -162,6 +162,9 @@ a:hover { color: var(--amber); }
   color: var(--white);
 }
 .nav-toggle svg { width: 24px; height: 24px; }
+.nav-toggle .icon-close { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-menu { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-close { display: block; }
 
 /* ===== HERO ===== */
 .hero {
