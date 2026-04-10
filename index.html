@@ -7,13 +7,18 @@
   <meta name="description" content="PerilWatch builds AI tools that level the playing field on contracts. Upload any lease, loan, or agreement and get an instant 0–100 risk score. Free to start.">
   <link rel="canonical" href="https://perilwatch.com/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <meta property="og:title" content="PerilWatch™ — AI Contract Intelligence">
+  <meta property="og:title" content="PerilWatch™ — AI Contract Intelligence for Small Business">
   <meta property="og:description" content="AI that watches contracts so small businesses don't get burned by fine print, hidden fees, or one-sided clauses.">
   <meta property="og:url" content="https://perilwatch.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PerilWatch™">
+  <meta property="og:image" content="https://perilwatch.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta property="article:modified_time" content="2026-04-04">
+  <meta name="twitter:site" content="@LiabilityScore">
+  <meta name="twitter:title" content="PerilWatch™ — AI Contract Intelligence for Small Business">
+  <meta name="twitter:description" content="AI that watches contracts so small businesses don't get burned by fine print, hidden fees, or one-sided clauses.">
+  <meta name="twitter:image" content="https://perilwatch.com/og-image.png">
+  <meta property="article:modified_time" content="2026-04-10">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -24,37 +29,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "PerilWatch™",
-    "url": "https://perilwatch.com",
-    "description": "PerilWatch builds AI contract intelligence tools that level the playing field for small businesses and individuals.",
-    "foundingDate": "2026",
-    "sameAs": ["https://liabilityscore.com"],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "PerilWatch Products",
-      "itemListElement": [
-        {
-          "@type": "SoftwareApplication",
-          "name": "LiabilityScore™",
-          "url": "https://liabilityscore.com",
-          "applicationCategory": "BusinessApplication",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          }
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://perilwatch.com/#organization",
+        "name": "PerilWatch™",
+        "url": "https://perilwatch.com",
+        "description": "AI contract intelligence for people who can't afford to be surprised. Parent brand of LiabilityScore™.",
+        "foundingDate": "2026",
+        "subOrganization": [
+          { "@type": "Organization", "name": "LiabilityScore™", "url": "https://liabilityscore.com" }
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "support@liabilityscore.com",
+          "contactType": "customer support"
         }
-      ]
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "PerilWatch™",
-    "url": "https://perilwatch.com"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://perilwatch.com/#website",
+        "url": "https://perilwatch.com",
+        "name": "PerilWatch™",
+        "publisher": { "@id": "https://perilwatch.com/#organization" }
+      }
+    ]
   }
   </script>
   <link rel="stylesheet" href="./css/style.css">
