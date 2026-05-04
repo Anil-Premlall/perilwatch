@@ -46,11 +46,14 @@ if (!API_KEY) {
   process.exit(2);
 }
 
+// Cloudflare Pages strips .html extensions via 308 redirects, so paths
+// here use the canonical (extension-less) form to avoid PSI paying a
+// redirect on every run.
 const URLS = [
   '/',
-  '/privacy.html',
-  '/terms.html',
-  '/cookies.html',
+  '/privacy',
+  '/terms',
+  '/cookies',
 ];
 
 const STRATEGIES = ['mobile', 'desktop'];
