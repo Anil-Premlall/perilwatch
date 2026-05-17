@@ -73,6 +73,7 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 
 ## Conventions
 - Uses ™ on every "PerilWatch" instance (per recent commit `10fde61`)
+- **UPL voice rule applies to all user-facing marketing copy** (homepage, landing pages, anything in the parent-brand surface area). Observational voice, never directive. No "you should", "push back on", "negotiate from strength", "do not sign". Source of truth: `liabilityscore-foundation/UPL_COMPLIANCE.md` (north-star sentence + voice test + forbidden-phrase list). PerilWatch had been overlooked in prior UPL sweeps because the workspace docs didn't list it as a workspace repo — fixed 2026-05-17.
 
 ## Current State
 - Site is intentionally tiny right now: homepage + privacy/terms/cookies. Functions primarily as a brand/parent page for the LiabilityScore network.
@@ -80,6 +81,8 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - **PSI scan** on demand via `node scripts/run-psi.js` — reads `PSI_API_KEY` from `C:\ClaudeProjects\.env` (workspace-wide).
 - Monthly Content Freshness workflow runs on cron (set up like sister projects).
 - `_headers` recently dropped `X-XSS-Protection` (commit `30cc0b1`); sitemap fixed to include all pages (`308028d`).
+- **SESSION START block prepended to CLAUDE.md (2026-05-17, `bfb1573`).** First time CLAUDE.md is git-tracked in this repo. Same 6-section block as the 4 sister repos, updated to reference the 5-repo ecosystem (including this repo).
+- **UPL voice cleanup shipped on homepage (2026-05-17, `7768b53`).** 3 directive phrases reframed to observational voice: hero subtitle ("you need to watch out for" → "drive contract risk"), step 4 title ("Negotiate from strength" → "See where leverage lives"), step 4 body ("clauses to push back on" → "clauses negotiated versions of this contract type commonly revise"). Privacy/cookies "you should" lines audited and intentionally left untouched (those describe reader privacy choices, not contract-signing advice).
 
 ## Open Questions / Next Steps
 - Decide whether perilwatch grows beyond a brand/landing page or stays minimal. If it stays minimal, current setup is sufficient.
@@ -87,6 +90,11 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - **Homepage mobile perf** — re-run PSI after CF Pages redeploys the GTM defer. Expected 68 → 90+. If still under 90, look at hero asset / render-blocking CSS as the next layer.
 
 ## Session Log
+### 2026-05-17
+- **UPL voice cleanup PR shipped + merged on homepage (`06c7c82` → merged as `7768b53`).** 3 violations on `index.html`: (1) hero subtitle "clauses you need to watch out for" → "clauses that drive contract risk"; (2) step 4 title "Negotiate from strength" → "See where leverage lives"; (3) step 4 body "Know exactly which clauses to push back on — and why — before you sign anything" → "See which clauses negotiated versions of this contract type commonly revise — and the reasoning behind each". Branch `voice/upl-homepage-cleanup` deleted local + origin post-merge.
+- **SESSION START block prepended to CLAUDE.md (`bfb1573`).** First time CLAUDE.md is git-tracked in this repo. Same 6-section block as the 4 sister repos, with `§1` updated to enumerate the 5-repo ecosystem (added perilwatch as the 5th).
+- **Pattern parity restored across the 5-repo workspace.** Prior workspace docs listed only 4 repos, which caused PerilWatch to be skipped in prior UPL sweeps and audits. Surfaced when a sister-property audit prompt asked "did you scan perilwatch?" — the answer was no, because the workspace doc said it wasn't there. Identical `§1` "five-repo ecosystem" change applied to all 5 repos' SESSION START blocks plus added to the workspace `.claude/CLAUDE.md` "Active subprojects" list.
+
 ### 2026-05-04
 - CLAUDE.md scaffolded as part of mirroring the CI/PSI pattern across all sister projects.
 - Added `.github/workflows/lighthouse.yml`, `lighthouserc.json` (4-URL coverage = whole site), and `scripts/run-psi.js` (commit `151683a`). PSI key shared via `C:\ClaudeProjects\.env` — see workspace memory `reference_workspace_env.md`. Same per-push assertions as the other static sites.
