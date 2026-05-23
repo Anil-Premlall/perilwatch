@@ -75,6 +75,40 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - Uses ™ on every "PerilWatch" instance (per recent commit `10fde61`)
 - **UPL voice rule applies to all user-facing marketing copy** (homepage, landing pages, anything in the parent-brand surface area). Observational voice, never directive. No "you should", "push back on", "negotiate from strength", "do not sign". Source of truth: `liabilityscore-foundation/UPL_COMPLIANCE.md` (north-star sentence + voice test + forbidden-phrase list). PerilWatch had been overlooked in prior UPL sweeps because the workspace docs didn't list it as a workspace repo — fixed 2026-05-17.
 
+## Connections
+> Concrete IDs/slugs for every external system this project talks to. Update via `/wrap connections` whenever a connection is added, removed, or repointed. Do not touch otherwise.
+
+### Repository
+- GitHub: `Anil-Premlall/perilwatch` (default branch `main`)
+- Workspace path: `C:\ClaudeProjects\perilwatch`
+
+### Hosting (Cloudflare Pages)
+- Production URL: https://perilwatch.com
+- `_headers` carries security/cache headers (X-XSS-Protection dropped 2026-05-04 in `30cc0b1`)
+- Auto-deploys from `main`
+- Cloudflare account / Pages project name: GAP — fill from CF dashboard
+
+### Analytics
+- GTM container: `GTM-TNNKFWLQ` (shared across the 3 satellite sites)
+- GA4 measurement ID: GAP — fill from GTM tag config
+- Google Search Console property: `perilwatch.com` (verified)
+
+### CI (GitHub Actions)
+- `.github/workflows/lighthouse.yml` — push/PR/manual-dispatch, all 4 pages (full site coverage)
+- `.github/workflows/monthly-freshness.yml` — cron set up like sister projects
+- PSI on demand via `node scripts/run-psi.js` — reads `PSI_API_KEY` from `C:\ClaudeProjects\.env`
+
+### MCP / tooling wired to this project
+- No project-specific MCP. Operates via direct git + GitHub Actions + Cloudflare Pages auto-deploy
+
+### Environment variables
+- No runtime env (static site)
+- Workspace-shared: `C:\ClaudeProjects\.env` for `PSI_API_KEY`
+
+### Gaps to fill
+- [ ] Cloudflare account + Pages project name
+- [ ] GA4 measurement ID (configured inside the GTM container)
+
 ## Current State
 - Site is intentionally tiny right now: homepage + privacy/terms/cookies. Functions primarily as a brand/parent page for the LiabilityScore network.
 - **Lighthouse CI** runs on every push/PR + manual dispatch. `http-server` + LHCI tests all 4 pages. Asserts a11y >= 0.9 and SEO >= 0.95 (errors); perf/best-practices warn-only. Reports as 14-day GitHub artifacts.
