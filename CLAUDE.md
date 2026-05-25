@@ -124,6 +124,11 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - **Homepage mobile perf** — re-run PSI after CF Pages redeploys the GTM defer. Expected 68 → 90+. If still under 90, look at hero asset / render-blocking CSS as the next layer.
 
 ## Session Log
+### 2026-05-22
+- **`## Connections` section added between Conventions and Current State (`b9aa6df`).** Repo `Anil-Premlall/perilwatch` + Cloudflare Pages hosting → `perilwatch.com` (with `_headers` X-XSS-Protection-dropped note), shared GTM container `GTM-TNNKFWLQ`, verified Google Search Console property, GitHub Actions workflows (all 4 pages covered by Lighthouse CI since the whole site is 4 HTML files). No Data/Observability rows (static site).
+- **Workspace-level Integrations map added to `C:\ClaudeProjects\.claude\CLAUDE.md`** + `/wrap` slash command updated with `/wrap connections [<project>]` mode. Not under git (workspace root isn't a repo).
+- **Gaps to fill, filled this session:** Google Search Console verification (confirmed verified). Remaining gaps: Cloudflare account + Pages project name, GA4 measurement ID.
+
 ### 2026-05-17
 - **UPL voice cleanup PR shipped + merged on homepage (`06c7c82` → merged as `7768b53`).** 3 violations on `index.html`: (1) hero subtitle "clauses you need to watch out for" → "clauses that drive contract risk"; (2) step 4 title "Negotiate from strength" → "See where leverage lives"; (3) step 4 body "Know exactly which clauses to push back on — and why — before you sign anything" → "See which clauses negotiated versions of this contract type commonly revise — and the reasoning behind each". Branch `voice/upl-homepage-cleanup` deleted local + origin post-merge.
 - **SESSION START block prepended to CLAUDE.md (`bfb1573`).** First time CLAUDE.md is git-tracked in this repo. Same 6-section block as the 4 sister repos, with `§1` updated to enumerate the 5-repo ecosystem (added perilwatch as the 5th).
