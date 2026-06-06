@@ -1,0 +1,39 @@
+name: SEO Audit
+
+# Catches the machine-readable SEO regressions Lighthouse does not: wrong or
+# redirecting canonicals, internal links to .html, broken internal links,
+# accidental noindex, duplicate titles, and sitemap drift.
+#
+# - push / PR to main: static audit (file tree + sitemap, no network). Fast;
+#   gates the merge so a bad canonical or .html link never reaches production.
+# - weekly + manual: live audit against the deployed site (every sitemap URL
+#   must be 200 with a self-referential canonical).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 7 * * 1'  # Mondays 07:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  seo-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Static SEO audit (file tree + sitemap)
+        run: node scripts/seo-audit.js
+
+      - name: Live SEO audit (deployed site)
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: node scripts/seo-audit.js --live --base https://perilwatch.com
