@@ -73,6 +73,8 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 
 ## Conventions
 - Uses ™ on every "PerilWatch" instance (per recent commit `10fde61`)
+- **Extensionless URLs only.** Never link `.html` (Cloudflare Pages 308-redirects it); `rel=canonical`, `og:url`, and sitemap `<loc>` must be extensionless. On-disk filenames stay `.html`.
+- **SEO integrity is gated by `scripts/seo-audit.js`** (CI on push/PR via `.github/workflows/seo-audit.yml`; weekly + dispatch live crawl). Run `node scripts/seo-audit.js` after any link/canonical/sitemap change.
 - **UPL voice rule applies to all user-facing marketing copy** (homepage, landing pages, anything in the parent-brand surface area). Observational voice, never directive. No "you should", "push back on", "negotiate from strength", "do not sign". Source of truth: `liabilityscore-foundation/UPL_COMPLIANCE.md` (north-star sentence + voice test + forbidden-phrase list). PerilWatch had been overlooked in prior UPL sweeps because the workspace docs didn't list it as a workspace repo — fixed 2026-05-17.
 
 ## Connections
@@ -95,6 +97,7 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 
 ### CI (GitHub Actions)
 - `.github/workflows/lighthouse.yml` — push/PR/manual-dispatch, all 4 pages (full site coverage)
+- `.github/workflows/seo-audit.yml` — push/PR static gate + weekly cron (`0 7 * * 1`) + dispatch live crawl. Runs `scripts/seo-audit.js`
 - `.github/workflows/monthly-freshness.yml` — cron set up like sister projects
 - PSI on demand via `node scripts/run-psi.js` — reads `PSI_API_KEY` from `C:\ClaudeProjects\.env`
 
@@ -111,6 +114,7 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 
 ## Current State
 - Site is intentionally tiny right now: homepage + privacy/terms/cookies. Functions primarily as a brand/parent page for the LiabilityScore network.
+- **SEO hygiene shipped 2026-06-06:** internal links + canonicals/og:url + sitemap are extensionless (0 `.html`); `scripts/seo-audit.js` guards canonical/link/sitemap integrity in CI (passes clean). Sitemap `<lastmod>` reverted to May dates in the freshness-bot merge — monthly job re-stamps 2026-07-01 (cosmetic).
 - **Lighthouse CI** runs on every push/PR + manual dispatch. `http-server` + LHCI tests all 4 pages. Asserts a11y >= 0.9 and SEO >= 0.95 (errors); perf/best-practices warn-only. Reports as 14-day GitHub artifacts.
 - **PSI scan** on demand via `node scripts/run-psi.js` — reads `PSI_API_KEY` from `C:\ClaudeProjects\.env` (workspace-wide).
 - Monthly Content Freshness workflow runs on cron (set up like sister projects).
@@ -124,6 +128,11 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - **Homepage mobile perf** — re-run PSI after CF Pages redeploys the GTM defer. Expected 68 → 90+. If still under 90, look at hero asset / render-blocking CSS as the next layer.
 
 ## Session Log
+### 2026-06-06
+- **`.html` cleanup (part of merge `54d1d98`).** Stripped `.html` from internal links, `rel=canonical`/`og:url`, and sitemap for cookies/privacy/terms (3 of 4 canonicals had pointed at redirecting `.html` URLs). Same fix applied across the network this session.
+- **Recovered 2 stranded May docs commits + merged freshness bot `9bf03d8`.** Local `main` was ahead with unpushed docs commits while the freshness bot pushed from the older base; merged, resolved the sitemap conflict (extensionless locs kept, freshness re-stamps lastmod 2026-07-01).
+- **SEO-integrity audit shipped.** Same `scripts/seo-audit.js` + `.github/workflows/seo-audit.yml` as the sister static sites (base `perilwatch.com`); passes clean (4 pages, 4 canonicals).
+
 ### 2026-05-22
 - **`## Connections` section added between Conventions and Current State (`b9aa6df`).** Repo `Anil-Premlall/perilwatch` + Cloudflare Pages hosting → `perilwatch.com` (with `_headers` X-XSS-Protection-dropped note), shared GTM container `GTM-TNNKFWLQ`, verified Google Search Console property, GitHub Actions workflows (all 4 pages covered by Lighthouse CI since the whole site is 4 HTML files). No Data/Observability rows (static site).
 - **Workspace-level Integrations map added to `C:\ClaudeProjects\.claude\CLAUDE.md`** + `/wrap` slash command updated with `/wrap connections [<project>]` mode. Not under git (workspace root isn't a repo).
