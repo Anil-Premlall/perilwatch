@@ -102,7 +102,7 @@ function hrefToFile(href, fromRel = 'index.html') {
 
 function extract(html) {
   const title = (html.match(/<title>([\s\S]*?)<\/title>/i) || [])[1];
-  const desc = (html.match(/<meta\s+name=["']description["']\s+content=["']([\s\S]*?)["']/i) || [])[1];
+  const desc = (html.match(/<meta\s+name=["']description["']\s+content=(["'])([\s\S]*?)\1/i) || [])[2];
   const canonical = (html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']*)["']/i) || [])[1];
   const robots = (html.match(/<meta\s+name=["']robots["']\s+content=["']([^"']*)["']/i) || [])[1] || '';
   const hrefs = [...html.matchAll(/href=["']([^"']+)["']/gi)].map((m) => m[1]);
