@@ -76,6 +76,7 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - **Extensionless URLs only.** Never link `.html` (Cloudflare Pages 308-redirects it); `rel=canonical`, `og:url`, and sitemap `<loc>` must be extensionless. On-disk filenames stay `.html`.
 - **SEO integrity is gated by `scripts/seo-audit.js`** (CI on push/PR via `.github/workflows/seo-audit.yml`; weekly + dispatch live crawl). Run `node scripts/seo-audit.js` after any link/canonical/sitemap change.
 - **UPL voice rule applies to all user-facing marketing copy** (homepage, landing pages, anything in the parent-brand surface area). Observational voice, never directive. No "you should", "push back on", "negotiate from strength", "do not sign". Source of truth: `liabilityscore-foundation/UPL_COMPLIANCE.md` (north-star sentence + voice test + forbidden-phrase list). PerilWatch had been overlooked in prior UPL sweeps because the workspace docs didn't list it as a workspace repo — fixed 2026-05-17.
+- **GTM loads on first user interaction, not `window.load`** (`scripts/delay-gtm.js`, idempotent, marker `gtm-delay-interaction`; 5s post-load timeout fallback). Keeps the 286KB analytics bundle out of the LCP/TBT window. `dataLayer` is initialized inline so event/conversion pushes queue before GTM loads. New pages must carry this block; re-run `node scripts/delay-gtm.js --apply` after adding pages.
 
 ## Connections
 > Concrete IDs/slugs for every external system this project talks to. Update via `/wrap connections` whenever a connection is added, removed, or repointed. Do not touch otherwise.
@@ -87,12 +88,14 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 ### Hosting (Cloudflare Pages)
 - Production URL: https://perilwatch.com
 - `_headers` carries security/cache headers (X-XSS-Protection dropped 2026-05-04 in `30cc0b1`)
+- `www → apex` 301 via Cloudflare **Redirect Rule** (dashboard, not repo), "Redirect from WWW to Root" template, preserve query string ON (added 2026-06-09, verified live)
 - Auto-deploys from `main`
-- Cloudflare account / Pages project name: GAP — fill from CF dashboard
+- Pages project: `perilwatch` (`perilwatch.pages.dev`)
+- Cloudflare account name/ID: GAP — fill from CF dashboard
 
 ### Analytics
 - GTM container: `GTM-TNNKFWLQ` (shared across the 3 satellite sites)
-- GA4 measurement ID: GAP — fill from GTM tag config
+- GA4 measurement ID: `G-JJSHGWMPME` (loaded via the GTM container, shared across the 3 satellites)
 - Google Search Console property: `perilwatch.com` (verified)
 
 ### CI (GitHub Actions)
@@ -109,8 +112,7 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - Workspace-shared: `C:\ClaudeProjects\.env` for `PSI_API_KEY`
 
 ### Gaps to fill
-- [ ] Cloudflare account + Pages project name
-- [ ] GA4 measurement ID (configured inside the GTM container)
+- [ ] Cloudflare account name/ID (Pages project name `perilwatch` now recorded)
 
 ## Current State
 - Site is intentionally tiny right now: homepage + privacy/terms/cookies. Functions primarily as a brand/parent page for the LiabilityScore network.
@@ -125,9 +127,17 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 ## Open Questions / Next Steps
 - Decide whether perilwatch grows beyond a brand/landing page or stays minimal. If it stays minimal, current setup is sufficient.
 - First LHCI run will baseline scores; investigate any a11y/SEO failures.
-- **Homepage mobile perf** — re-run PSI after CF Pages redeploys the GTM defer. Expected 68 → 90+. If still under 90, look at hero asset / render-blocking CSS as the next layer.
+- **Homepage mobile perf RESOLVED (2026-06-13):** PSI homepage mobile is now 100 (LCP 1.5s), up from the original 68. The GTM interaction-delay keeps it consistent. `/cookies` showed a single mobile-only 75/5.0s outlier in one scan (desktop 100) — recheck if it recurs.
 
 ## Session Log
+### 2026-06-13
+- **GTM loader changed to first-interaction-delay across all 4 pages (`perf/delay-gtm-interaction`, merged + deployed).** Network-wide fix (see TE/SISTL logs for the full diagnosis: the 286KB GTM/GA bundle landing in Lighthouse's measurement window even when deferred to `load`). Now loads on first interaction (scroll/mousemove/touch/key/pointer/click) + 5s post-load timeout fallback; `dataLayer` stays inline. Container GTM-TNNKFWLQ + all tags unchanged. Idempotent `scripts/delay-gtm.js` added. Homepage mobile PSI was already 100 after the GTM `load`-defer; this hardens it against the LCP/TBT swings seen on the longer article templates elsewhere in the network.
+- **GA4 measurement ID identified: `G-JJSHGWMPME`** (via the shared GTM container). Filled into Connections.
+
+### 2026-06-09
+- **`www → apex` 301 added via Cloudflare Redirect Rule (dashboard) — part of a 3-zone sweep (TE, SISTL, PerilWatch).** `www.perilwatch.com` had been serving HTTP 200 with no redirect (same as the sister zones; `www` is a Pages custom domain routed through the CF proxy but absent from the DNS tab). Added the built-in "Redirect from WWW to Root" template, 301, preserve query string ON. Cloudflare's "no proxied DNS record for www" warning was a false positive (validator only sees DNS-tab records, not Pages custom domains) — deployed anyway. **Verified live:** `www → 301 → apex` with query string preserved.
+- No repo commits this session — all changes were in the Cloudflare dashboard.
+
 ### 2026-06-06
 - **`.html` cleanup (part of merge `54d1d98`).** Stripped `.html` from internal links, `rel=canonical`/`og:url`, and sitemap for cookies/privacy/terms (3 of 4 canonicals had pointed at redirecting `.html` URLs). Same fix applied across the network this session.
 - **Recovered 2 stranded May docs commits + merged freshness bot `9bf03d8`.** Local `main` was ahead with unpushed docs commits while the freshness bot pushed from the older base; merged, resolved the sitemap conflict (extensionless locs kept, freshness re-stamps lastmod 2026-07-01).
