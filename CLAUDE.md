@@ -91,7 +91,7 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - `www → apex` 301 via Cloudflare **Redirect Rule** (dashboard, not repo), "Redirect from WWW to Root" template, preserve query string ON (added 2026-06-09, verified live)
 - Auto-deploys from `main`
 - Pages project: `perilwatch` (`perilwatch.pages.dev`)
-- Cloudflare account name/ID: GAP — fill from CF dashboard
+- Cloudflare account ID: `08a74d008ff332b419b26e8918c18edd`
 
 ### Analytics
 - GTM container: `GTM-TNNKFWLQ` (shared across the 3 satellite sites)
@@ -112,7 +112,7 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - Workspace-shared: `C:\ClaudeProjects\.env` for `PSI_API_KEY`
 
 ### Gaps to fill
-- [ ] Cloudflare account name/ID (Pages project name `perilwatch` now recorded)
+- _None outstanding (Cloudflare account ID filled 2026-06-15)._
 
 ## Current State
 - Site is intentionally tiny right now: homepage + privacy/terms/cookies. Functions primarily as a brand/parent page for the LiabilityScore network.
