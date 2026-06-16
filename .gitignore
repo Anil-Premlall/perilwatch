@@ -1,0 +1,8 @@
+# Scratch / local-only artifacts — never commit these.
+# GSC performance exports and other CSV scratch land in the repo root during
+# analysis; keep them out of git (matches the shouldisignthislease/tenantexposure convention).
+*.csv
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
