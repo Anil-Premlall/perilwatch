@@ -130,6 +130,10 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - **Homepage mobile perf RESOLVED (2026-06-13):** PSI homepage mobile is now 100 (LCP 1.5s), up from the original 68. The GTM interaction-delay keeps it consistent. `/cookies` showed a single mobile-only 75/5.0s outlier in one scan (desktop 100) — recheck if it recurs.
 
 ## Session Log
+### 2026-06-15
+- **Legal-accuracy scrub: PerilWatch audited clean.** The brand/landing pages are statute-light by design; no legal-accuracy issues found. (One non-legal note: the homepage stat strip — $1,300/hr, 68%, 47% — is uncited marketing substantiation, not a legal claim; flagged for a future second look.)
+- **Connections: Cloudflare account ID `08a74d008ff332b419b26e8918c18edd` filled (PR #1).**
+
 ### 2026-06-13
 - **GTM loader changed to first-interaction-delay across all 4 pages (`perf/delay-gtm-interaction`, merged + deployed).** Network-wide fix (see TE/SISTL logs for the full diagnosis: the 286KB GTM/GA bundle landing in Lighthouse's measurement window even when deferred to `load`). Now loads on first interaction (scroll/mousemove/touch/key/pointer/click) + 5s post-load timeout fallback; `dataLayer` stays inline. Container GTM-TNNKFWLQ + all tags unchanged. Idempotent `scripts/delay-gtm.js` added. Homepage mobile PSI was already 100 after the GTM `load`-defer; this hardens it against the LCP/TBT swings seen on the longer article templates elsewhere in the network.
 - **GA4 measurement ID identified: `G-JJSHGWMPME`** (via the shared GTM container). Filled into Connections.
