@@ -94,8 +94,8 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - Cloudflare account ID: `08a74d008ff332b419b26e8918c18edd`
 
 ### Analytics
-- GTM container: `GTM-TNNKFWLQ` (shared across the 3 satellite sites)
-- GA4 measurement ID: `G-JJSHGWMPME` (loaded via the GTM container, shared across the 3 satellites)
+- GTM container: `GTM-TNNKFWLQ` (one container shared across the 3 satellites + liabilityscore.com; loads a per-site GA4 property)
+- GA4 measurement ID: `G-7DYWLPERC5` (perilwatch.com property, loaded via the shared GTM container; corrected 2026-07-26 — previously misdocumented as SISTL's `G-JJSHGWMPME`)
 - Google Search Console property: `perilwatch.com` (verified)
 
 ### CI (GitHub Actions)
