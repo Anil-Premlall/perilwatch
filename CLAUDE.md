@@ -130,6 +130,9 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - **Homepage mobile perf RESOLVED (2026-06-13):** PSI homepage mobile is now 100 (LCP 1.5s), up from the original 68. The GTM interaction-delay keeps it consistent. `/cookies` showed a single mobile-only 75/5.0s outlier in one scan (desktop 100) — recheck if it recurs.
 
 ## Session Log
+### 2026-07-26 (later session)
+- **PSI pipeline restored (script-only session).** `scripts/run-psi.js` now sends a Referer header — the shared PSI key was replaced with a new dedicated key (the old one turned out to be the Gemini key) and is website-restricted; the script sends the `www.` origin because the allowlist's `https://*.<domain>/*` wildcard rows exclude the bare apex (apex rows also added console-side as belt-and-suspenders). Two commits; no site changes.
+
 ### 2026-07-26
 - **Doc-only session (no site changes).** Connections GA4 corrected to **`G-7DYWLPERC5`** — perilwatch.com's own property, loaded per-site by the shared GTM container `GTM-TNNKFWLQ` (Anil-confirmed 2026-07-26; previously misdocumented as SISTL's `G-JJSHGWMPME`). Push merged the 2026-07-01 freshness-bot commit that was ahead of local. (This repo's SESSION START §1 already said "other four" — no fix needed here.)
 - **Cross-repo note:** foundation `UPL_COMPLIANCE.md` refreshed (§6 surface list + new §11 content-accuracy rules) — it remains the voice source of truth for this site's marketing copy.
