@@ -66,7 +66,7 @@ async function check(path, strategy) {
   for (const c of ['PERFORMANCE', 'ACCESSIBILITY', 'BEST_PRACTICES', 'SEO']) {
     u.searchParams.append('category', c);
   }
-  const res = await fetch(u);
+  const res = await fetch(u, { headers: { referer: SITE + '/' } }); // PSI key is website-restricted (2026-07-26) — send the site referer
   if (!res.ok) {
     const body = await res.text().catch(() => '');
     throw new Error(`HTTP ${res.status} ${res.statusText} :: ${body.slice(0, 200)}`);
