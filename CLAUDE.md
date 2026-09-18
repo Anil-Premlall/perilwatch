@@ -130,6 +130,8 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - **Homepage mobile perf RESOLVED (2026-06-13):** PSI homepage mobile is now 100 (LCP 1.5s), up from the original 68. The GTM interaction-delay keeps it consistent. `/cookies` showed a single mobile-only 75/5.0s outlier in one scan (desktop 100) — recheck if it recurs.
 
 ## Session Log
+### 2026-09-17
+- **PR #4 merged and deployed:** removed unsupported contract statistics and the absolute coverage and latency claims. **PR #5** removes a redundant product-facts tile and is pending merge.
 ### 2026-07-26 (later session)
 - **PSI pipeline restored (script-only session).** `scripts/run-psi.js` now sends a Referer header — the shared PSI key was replaced with a new dedicated key (the old one turned out to be the Gemini key) and is website-restricted; the script sends the `www.` origin because the allowlist's `https://*.<domain>/*` wildcard rows exclude the bare apex (apex rows also added console-side as belt-and-suspenders). Two commits; no site changes.
 
@@ -138,7 +140,7 @@ Static brand/landing site for PerilWatch™, the parent brand for the LiabilityS
 - **Cross-repo note:** foundation `UPL_COMPLIANCE.md` refreshed (§6 surface list + new §11 content-accuracy rules) — it remains the voice source of truth for this site's marketing copy.
 
 ### 2026-06-15
-- **Legal-accuracy scrub: PerilWatch audited clean.** The brand/landing pages are statute-light by design; no legal-accuracy issues found. (One non-legal note: the homepage stat strip — $1,300/hr, 68%, 47% — is uncited marketing substantiation, not a legal claim; flagged for a future second look.)
+- **Legal-accuracy scrub: PerilWatch audited clean.** The brand/landing pages are statute-light by design; no legal-accuracy issues found. The former unsupported homepage statistics and absolute latency claim were removed in PR #4; the product-facts strip now uses qualified descriptions.
 - **Connections: Cloudflare account ID `08a74d008ff332b419b26e8918c18edd` filled (PR #1).**
 
 ### 2026-06-13
